@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="brown">
+        #9D4400
+    </color>
+    <color name="green_light">
+        #D0D7B5
+    </color>
+    <color name="green_dark">
+        #194400
+    </color>
+    <color name="orange">
+        #F97E20
+    </color>
+    <color name="coffe">
+        #622C00
+    </color>
+    <color name="coffe_dark">
+        #291200
+    </color>
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+</resources>

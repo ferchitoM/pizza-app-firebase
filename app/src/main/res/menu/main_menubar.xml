@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/buttonProducts"
+        android:icon="@mipmap/pizza_color2_nav_icon"
+        android:title="Pizzas" />
+    <item
+        android:id="@+id/buttonSnacks"
+        android:icon="@mipmap/snacks2_color_nav_icon"
+        android:title="Snacks" />
+    <item
+        android:id="@+id/buttonDrinks"
+        android:icon="@mipmap/drinks_color_nav_icon"
+        android:title="Bebidas" />
+    <item
+        android:id="@+id/buttonCart"
+        android:icon="@mipmap/cart_color2_nav_icon"
+        android:title="Pedido" />
+</menu>

@@ -1,0 +1,49 @@
+{
+  "project_info": {
+    "project_number": "553468761415",
+    "firebase_url": "https://fir-crud-1bcba-default-rtdb.firebaseio.com",
+    "project_id": "fir-crud-1bcba",
+    "storage_bucket": "fir-crud-1bcba.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:553468761415:android:c740a5ed942cff575fe862",
+        "android_client_info": {
+          "package_name": "com.example.firebase_crud"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB2yAAO-KDsvzKQ9XMPYMVZrMDp-HiTm-M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:553468761415:android:2a02dfaf7f5e28055fe862",
+        "android_client_info": {
+          "package_name": "com.example.pizza_app_firebase"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB2yAAO-KDsvzKQ9XMPYMVZrMDp-HiTm-M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

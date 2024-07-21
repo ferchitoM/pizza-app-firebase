@@ -3,18 +3,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="125dp"
     android:background="@color/coffe_dark">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
-        android:layout_height="120dp"
+        android:layout_height="match_parent"
         android:layout_marginStart="15dp"
         android:layout_marginTop="15dp"
         android:layout_marginEnd="15dp"
-        android:background="@color/coffe_dark"
-        android:paddingBottom="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -23,15 +21,13 @@
             android:id="@+id/image"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/rounded_borders"
+            android:background="@drawable/rounded_borders_shadow"
             android:clipToOutline="true"
             android:scaleType="centerCrop"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0"
             tools:srcCompat="@mipmap/product1" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -41,12 +37,31 @@
             android:background="@drawable/rounded_borders_shadow"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.0">
 
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <TextView
+            android:id="@+id/total"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="58dp"
+            android:layout_weight="1"
+            android:fontFamily="@font/caveat_brush"
+            android:shadowColor="#000000"
+            android:shadowDx="5"
+            android:shadowDy="5"
+            android:shadowRadius="5"
+            android:text="$ 10.049.900"
+            android:textAlignment="textStart"
+            android:textColor="#FFFFFF"
+            android:textSize="30dp"
+            app:layout_constraintStart_toEndOf="@+id/size"
+            app:layout_constraintTop_toTopOf="@+id/image" />
 
         <TextView
             android:id="@+id/size"
@@ -61,7 +76,7 @@
             android:shadowDx="5"
             android:shadowDy="5"
             android:shadowRadius="5"
-            android:text="Grande"
+            android:text="10 Grande"
             android:textAlignment="textStart"
             android:textColor="#FFFFFF"
             android:textSize="30dp"
@@ -80,58 +95,45 @@
             android:shadowDx="5"
             android:shadowDy="5"
             android:shadowRadius="5"
-            android:text="10 Pizza hawaiana"
+            android:text="Pizza hawaiana"
             android:textColor="#FFFFFF"
             android:textSize="34sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/total"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
-            android:layout_weight="1"
-            android:fontFamily="@font/caveat_brush"
-            android:shadowColor="#000000"
-            android:shadowDx="5"
-            android:shadowDy="5"
-            android:shadowRadius="5"
-            android:text="$ 10.049.900"
-            android:textAlignment="textStart"
-            android:textColor="#FFFFFF"
-            android:textSize="30dp"
-            app:layout_constraintStart_toEndOf="@+id/size"
-            app:layout_constraintTop_toBottomOf="@+id/name" />
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <LinearLayout
-        android:layout_width="62dp"
-        android:layout_height="111dp"
-        android:layout_marginEnd="15dp"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="10dp"
+        android:gravity="center_vertical"
         android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/constraintLayout"
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageButton
             android:id="@+id/buttonAdd"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="45dp"
+            android:layout_marginBottom="2dp"
             android:background="@null"
+            android:padding="2dp"
             android:scaleType="centerCrop"
-            app:srcCompat="@drawable/botonadd_icon" />
+            app:srcCompat="@mipmap/add_icon" />
 
         <ImageButton
             android:id="@+id/buttonRemove"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="45dp"
+            android:layout_marginTop="2dp"
             android:background="@null"
+            android:padding="2dp"
             android:scaleType="centerCrop"
-            app:srcCompat="@drawable/buttonremove_icon" />
+            app:srcCompat="@mipmap/remove_icon" />
 
     </LinearLayout>
 

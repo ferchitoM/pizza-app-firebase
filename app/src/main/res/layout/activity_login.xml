@@ -19,15 +19,15 @@
             android:id="@+id/actionBar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/orange"
+            android:background="@color/brown"
             android:minHeight="?attr/actionBarSize">
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/circle_imageView"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:padding="8dp"
-                android:src="@drawable/pizzas2_nav_icon" />
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/app_color_icon" />
+
         </androidx.appcompat.widget.Toolbar>
 
     </com.google.android.material.appbar.AppBarLayout>

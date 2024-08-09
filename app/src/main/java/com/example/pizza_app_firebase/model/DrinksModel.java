@@ -13,16 +13,21 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class MenuModel {
+public class DrinksModel {
 
-    private FirebaseDatabase database;
-    private FirebaseAuth mAuth;
-    private ValueEventListener eventListener;
-    private ArrayList<Product> products = new ArrayList<Product>();
+    private ArrayList<Product>  products;
+    private FirebaseDatabase    database;
+    private FirebaseAuth        mAuth;
+    private ValueEventListener  eventListener;
+    private String              category;
 
-    public MenuModel() {
-        database = FirebaseDatabase.getInstance();
-        mAuth = FirebaseAuth.getInstance();
+
+    public DrinksModel() {
+        products    = new ArrayList<>();
+        database    = FirebaseDatabase.getInstance();
+        mAuth       = FirebaseAuth.getInstance();
+        category    = "drinks";
+
     }
 
     public void showProducts(){
@@ -35,16 +40,17 @@ public class MenuModel {
             String userUID = currentUser.getUid();
 
             DatabaseReference ref = database.getReference()
-                    .child("users")
-                    .child(userUID)
-                    .child("products")
-                    .child("Pizzas");
+                    .child("users") //Usuario dueño de la empresa
+                    .child(userUID) //UID del dueño de la empresa
+                    .child("product_categories") //Pizzas, snacks, bebidas
+                    .child(category); //Pizzas
 
             eventListener = ref.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
 
                     for(DataSnapshot productSnapshot : snapshot.getChildren()){
+
                         Product item = productSnapshot.getValue(Product.class);
                         if(item != null) products.add(item);
                     }

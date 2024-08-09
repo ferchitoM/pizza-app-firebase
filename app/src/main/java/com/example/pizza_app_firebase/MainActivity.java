@@ -2,7 +2,6 @@ package com.example.pizza_app_firebase;
 
 import android.os.Bundle;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -10,11 +9,10 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.example.pizza_app_firebase.databinding.ActivityMainBinding;
 import com.example.pizza_app_firebase.fragments.DrinksFragment;
-import com.example.pizza_app_firebase.fragments.MenuFragment;
-import com.example.pizza_app_firebase.fragments.ShoppingCarFragment;
+import com.example.pizza_app_firebase.fragments.PizzasFragment;
+import com.example.pizza_app_firebase.fragments.CartFragment;
 import com.example.pizza_app_firebase.fragments.SnacksFragment;
-import com.example.pizza_app_firebase.shopping.ShoppingCart;
-import com.google.android.material.bottomnavigation.BottomNavigationItemView;
+import com.example.pizza_app_firebase.cart.ShoppingCart;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -36,15 +34,15 @@ public class MainActivity extends AppCompatActivity {
 
             int id = item.getItemId();
 
-            if(id == R.id.buttonProducts) switchFragment(new MenuFragment());
+            if(id == R.id.buttonProducts) switchFragment(new PizzasFragment());
             if(id == R.id.buttonSnacks) switchFragment(new SnacksFragment());
             if(id == R.id.buttonDrinks) switchFragment(new DrinksFragment());
-            if(id == R.id.buttonCart) switchFragment(new ShoppingCarFragment());
+            if(id == R.id.buttonCart) switchFragment(new CartFragment());
 
             return true;
         });
 
-        switchFragment(new MenuFragment());
+        switchFragment(new PizzasFragment());
     }
 
     public void switchFragment(Fragment fragment) {
@@ -54,15 +52,4 @@ public class MainActivity extends AppCompatActivity {
         fragmentTransaction.commit();
 
     }
-
-    public void selectShoppingCartIcon(){
-
-        int id = binding.navBar.getSelectedItemId();
-        BottomNavigationItemView itemNavBar = binding.navBar.findViewById(id);
-        itemNavBar.setChecked(false);
-
-        itemNavBar = binding.navBar.findViewById(R.id.buttonCart);
-        itemNavBar.setChecked(true);
-    }
-
 }

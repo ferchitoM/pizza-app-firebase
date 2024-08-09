@@ -1,4 +1,4 @@
-package com.example.pizza_app_firebase.shopping;
+package com.example.pizza_app_firebase.cart;
 
 public class CartProduct {
 

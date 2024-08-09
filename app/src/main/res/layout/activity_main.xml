@@ -6,7 +6,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_gravity="top"
-    android:backgroundTint="@color/coffe_dark"
     android:outlineAmbientShadowColor="#D6D1D1"
     android:outlineSpotShadowColor="#FFFFFF"
     tools:context=".MainActivity">
@@ -41,7 +40,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="56dp"
-        android:background="@color/coffe_dark"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

@@ -6,6 +6,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
@@ -16,16 +18,17 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.pizza_app_firebase.MainActivity;
 import com.example.pizza_app_firebase.R;
 import com.example.pizza_app_firebase.presenter.CartPresenter;
-import com.example.pizza_app_firebase.shopping.CartListAdapter;
-import com.example.pizza_app_firebase.shopping.CartProduct;
+import com.example.pizza_app_firebase.cart.CartListAdapter;
+import com.example.pizza_app_firebase.cart.CartProduct;
 import com.example.pizza_app_firebase.view.CartView;
 
+import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.Locale;
 
-public class ShoppingCarFragment extends Fragment implements CartView {
+public class CartFragment extends Fragment implements CartView {
 
     private CartPresenter       presenter;
-
 
     View                        view;
     MainActivity                mainActivity;
@@ -34,12 +37,14 @@ public class ShoppingCarFragment extends Fragment implements CartView {
     RecyclerView                lista;
     AlertDialog.Builder         builder;
     AlertDialog                 alertDialog;
+    TextView                    message;
+    Button                      payButton;
 
-    public ShoppingCarFragment() {
+    public CartFragment() {
     }
 
-    public static ShoppingCarFragment newInstance(String param1, String param2) {
-        ShoppingCarFragment fragment = new ShoppingCarFragment();
+    public static CartFragment newInstance(String param1, String param2) {
+        CartFragment fragment = new CartFragment();
         return fragment;
     }
 
@@ -54,7 +59,9 @@ public class ShoppingCarFragment extends Fragment implements CartView {
         view            = inflater.inflate(R.layout.fragment_shopping_car, container, false);
 
         mainActivity    = (MainActivity) getActivity();
-        presenter       = new CartPresenter((ShoppingCarFragment) this);
+        presenter       = new CartPresenter((CartFragment) this);
+        message         = view.findViewById(R.id.message);
+        payButton       = view.findViewById(R.id.payButton);
 
         LinearLayoutManager layoutManager
                         = new LinearLayoutManager(getContext());
@@ -66,11 +73,14 @@ public class ShoppingCarFragment extends Fragment implements CartView {
         adapter         = new CartListAdapter(getContext(), productsArray, presenter);
         lista           .setAdapter(adapter);
 
-        productsArray.forEach(product -> {
-           Log.e("Producto", product.name);
+        if(productsArray.size() > 0) buttonPayment(true);
+        else buttonPayment(false);
+
+        payButton.setOnClickListener(v -> {
+
         });
 
-        return          view;
+        return view;
     }
 
 
@@ -88,21 +98,62 @@ public class ShoppingCarFragment extends Fragment implements CartView {
     }
 
     @Override
-    public void showRemoveProductDialog(CartProduct product) {
+    public void showRemoveProductDialog(CartProduct product, int index) {
 
+        String title;
+        String msg;
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setTitle(product.name.toUpperCase());
+
+        NumberFormat myFormat   = NumberFormat.getCurrencyInstance(new Locale("es", "CO"));
+        myFormat                .setMaximumFractionDigits(0);
+
+        if(product.size != null) {
+            // Pizza products
+            title   = product.name.toUpperCase();
+            msg     = product.amount + " " + product.size + " (" + myFormat.format(product.total) + " COP)";
+            builder .setTitle(title);
+            builder .setMessage(msg);
+        }
+        else {
+            //Other products
+            title   = product.amount + " " + product.name.toUpperCase() + " (" + myFormat.format(product.total) + " COP)";
+            builder .setTitle(title);
+        }
 
         builder.setPositiveButton("Quitar del carrito", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
 
-                mainActivity.shoppingCart.removeProduct(product.id);
                 Toast.makeText(getContext(), "El producto se ha borrado del carrito", Toast.LENGTH_SHORT).show();
+                mainActivity.shoppingCart.removeProduct(index);
+                adapter.notifyDataSetChanged();
+
+                if(mainActivity.shoppingCart.getSize() == 0) {
+                    buttonPayment(false);
+                }
+
+            }
+        });
+
+        builder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
 
             }
         });
 
         AlertDialog dialog  = builder.create();
         dialog.show();
+    }
+
+    @Override
+    public void buttonPayment(boolean paymentVisibility) {
+        if(paymentVisibility){
+            payButton.setVisibility(View.VISIBLE);
+            message.setVisibility(View.GONE);
+        }
+        else {
+            payButton.setVisibility(View.GONE);
+            message.setVisibility(View.VISIBLE);
+        }
     }
 }

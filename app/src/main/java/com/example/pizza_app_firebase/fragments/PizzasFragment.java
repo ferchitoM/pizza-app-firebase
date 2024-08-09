@@ -14,45 +14,40 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.pizza_app_firebase.MainActivity;
 import com.example.pizza_app_firebase.R;
-import com.example.pizza_app_firebase.presenter.MenuPresenter;
+import com.example.pizza_app_firebase.presenter.PizzasPresenter;
 import com.example.pizza_app_firebase.product.Product;
-import com.example.pizza_app_firebase.product.ProductListAdapter;
+import com.example.pizza_app_firebase.product.PizzasListAdapter;
 import com.example.pizza_app_firebase.product.Size;
-import com.example.pizza_app_firebase.shopping.CartProduct;
-import com.example.pizza_app_firebase.view.MenuView;
+import com.example.pizza_app_firebase.cart.CartProduct;
+import com.example.pizza_app_firebase.view.PizzasView;
 
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Locale;
 import java.util.Map;
 
-public class MenuFragment extends Fragment implements MenuView {
+public class PizzasFragment extends Fragment implements PizzasView {
 
-    private MenuPresenter   presenter;
+    private ArrayList<Product>  products = new ArrayList<Product>();
+    private PizzasPresenter     presenter;
 
+    View                        view;
+    MainActivity                mainActivity;
+    PizzasListAdapter           adapter;
+    RecyclerView                lista;
+    AlertDialog.Builder         builder;
+    AlertDialog                 alertDialog;
 
-    View                    view;
-    MainActivity            mainActivity;
-    ArrayList<Product>      productsArray;
-    ProductListAdapter      adapter;
-    RecyclerView            lista;
-    AlertDialog.Builder     builder;
-    AlertDialog             alertDialog;
-
-    public MenuFragment() {
-
+    public PizzasFragment() {
     }
 
-    public static MenuFragment newInstance() {
-        MenuFragment fragment   = new MenuFragment();
+    public static PizzasFragment newInstance() {
+        PizzasFragment fragment   = new PizzasFragment();
         return fragment;
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-    }
+    public void onCreate(Bundle savedInstanceState) { super.onCreate(savedInstanceState); }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -60,7 +55,7 @@ public class MenuFragment extends Fragment implements MenuView {
         view            = inflater.inflate(R.layout.fragment_menu, container, false);
 
         mainActivity    = (MainActivity) getActivity();
-        presenter       = new MenuPresenter((MenuFragment) this);
+        presenter       = new PizzasPresenter((PizzasFragment) this);
 
         LinearLayoutManager layoutManager
                         = new LinearLayoutManager(getContext());
@@ -68,8 +63,7 @@ public class MenuFragment extends Fragment implements MenuView {
         lista           .setLayoutManager(layoutManager);
         lista           .setHasFixedSize(true);
 
-        productsArray   = new ArrayList<Product>();
-        adapter         = new ProductListAdapter(getContext(), productsArray, presenter);
+        adapter         = new PizzasListAdapter(getContext(), products, presenter);
         lista           .setAdapter(adapter);
 
         presenter       .loadProducts();
@@ -79,10 +73,10 @@ public class MenuFragment extends Fragment implements MenuView {
 
     @Override
     public void showProductsOnList(ArrayList<Product> productList) {
-        productsArray   .clear();
-        productsArray   .addAll(productList);
+        products    .clear();
+        products    .addAll(productList);
 
-        adapter         .notifyDataSetChanged();
+        adapter     .notifyDataSetChanged();
     }
 
     @Override

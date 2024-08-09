@@ -1,6 +1,6 @@
 package com.example.pizza_app_firebase.model;
 
-import com.example.pizza_app_firebase.shopping.CartProduct;
+import com.example.pizza_app_firebase.cart.CartProduct;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;

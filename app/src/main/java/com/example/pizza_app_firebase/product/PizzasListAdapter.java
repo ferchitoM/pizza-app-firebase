@@ -12,17 +12,17 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.pizza_app_firebase.R;
-import com.example.pizza_app_firebase.presenter.MenuPresenter;
+import com.example.pizza_app_firebase.presenter.PizzasPresenter;
 
 import java.util.ArrayList;
 
-public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.myViewHolder> {
+public class PizzasListAdapter extends RecyclerView.Adapter<PizzasListAdapter.myViewHolder> {
 
     private Context             context;
     private ArrayList<Product>  productList;
-    private MenuPresenter       presenter;
+    private PizzasPresenter presenter;
 
-    public ProductListAdapter(Context context, ArrayList<Product> productList, MenuPresenter presenter) {
+    public PizzasListAdapter(Context context, ArrayList<Product> productList, PizzasPresenter presenter) {
         this.context        = context;
         this.productList    = productList;
         this.presenter      = presenter;
@@ -38,15 +38,15 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull myViewHolder holder, int position) {
-        Product product = productList.get(position);
-        int idImage     = context.getResources().getIdentifier(product.image, "mipmap", context.getPackageName());
+        Product product         = productList.get(position);
+        int idImage             = context.getResources().getIdentifier(product.image, "mipmap", context.getPackageName());
 
-        holder.name     .setText(product.name.toUpperCase());
-        holder.image    .setImageResource(idImage);
+        holder.name             .setText(product.name.toUpperCase());
+        holder.description      .setText(product.description);
+        holder.image            .setImageResource(idImage);
 
         holder.mainLayout.setOnClickListener(v -> {
             presenter.showDialog(product,  product.sizes);
-            Toast.makeText(context, product.name, Toast.LENGTH_SHORT).show();
         });
     }
 
@@ -58,6 +58,7 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
     class myViewHolder extends RecyclerView.ViewHolder {
 
         private TextView    name;
+        private TextView    description;
         private ImageView   image;
         private View        mainLayout;
 
@@ -65,6 +66,7 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
             super(itemView);
 
             name        = itemView.findViewById(R.id.name);
+            description = itemView.findViewById(R.id.description);
             image       = itemView.findViewById(R.id.image);
             mainLayout  = itemView.findViewById(R.id.mainLayout);
         }

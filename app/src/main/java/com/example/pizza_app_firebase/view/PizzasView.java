@@ -5,7 +5,7 @@ import com.example.pizza_app_firebase.product.Product;
 import java.util.ArrayList;
 import java.util.Map;
 
-public interface MenuView {
+public interface PizzasView {
     void showProductsOnList(ArrayList<Product> products);
     void showMessageError(String errorMessage);
     void loadProducts();

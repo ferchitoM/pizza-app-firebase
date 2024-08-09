@@ -4,7 +4,7 @@ public class User {
     public String name;
     public String email;
     public String password;
-    public String phone;
+    public Long phone;
     public String address;
     public int role;
 
@@ -12,12 +12,12 @@ public class User {
         this.name = "";
         this.email = "";
         this.password = "";
-        this.phone = "";
+        this.phone = 0L;
         this.address = "";
         this.role = 1; //Client role
     }
 
-    public User(String name, String email, String password, String phone, String address) {
+    public User(String name, String email, String password, Long phone, String address) {
         this.name = name;
         this.email = email;
         this.password = password;

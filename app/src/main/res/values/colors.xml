@@ -18,6 +18,21 @@
     <color name="coffe_dark">
         #291200
     </color>
+    <color name="red">
+        #E32929
+    </color>
+    <color name="red_dark">
+        #982121
+    </color>
+    <color name="yellow">
+        #FFB80E
+    </color>
+    <color name="purple">
+        #431730
+    </color>
+    <color name="blue">
+        #568A9F
+    </color>
     <color name="white">#FFFFFF</color>
     <color name="black">#000000</color>
 </resources>

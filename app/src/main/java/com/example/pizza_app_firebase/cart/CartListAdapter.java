@@ -1,4 +1,4 @@
-package com.example.pizza_app_firebase.shopping;
+package com.example.pizza_app_firebase.cart;
 
 import static com.google.android.material.internal.ContextUtils.getActivity;
 
@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.pizza_app_firebase.MainActivity;
 import com.example.pizza_app_firebase.R;
+import com.example.pizza_app_firebase.fragments.CartFragment;
 import com.example.pizza_app_firebase.presenter.CartPresenter;
 
 import java.text.NumberFormat;
@@ -23,10 +24,10 @@ import java.util.Locale;
 
 public class CartListAdapter extends RecyclerView.Adapter<CartListAdapter.myViewHolder> {
 
-    private Context context;
-    private ArrayList<CartProduct> productList;
-    private CartPresenter presenter;
-    private MainActivity mainActivity;
+    private Context                 context;
+    private ArrayList<CartProduct>  productList;
+    private CartPresenter           presenter;
+    private MainActivity            mainActivity;
 
     public CartListAdapter(Context context, ArrayList<CartProduct> productList, CartPresenter presenter) {
         this.context        = context;
@@ -43,7 +44,7 @@ public class CartListAdapter extends RecyclerView.Adapter<CartListAdapter.myView
         View view   = LayoutInflater.from(parent.getContext())
                     .inflate(R.layout.list_cart_product_layout, parent, false);
 
-        return new myViewHolder(view);
+        return new  myViewHolder(view);
     }
 
     @Override
@@ -53,41 +54,65 @@ public class CartListAdapter extends RecyclerView.Adapter<CartListAdapter.myView
 
         int idImage             = context.getResources().getIdentifier(product.image, "mipmap", context.getPackageName());
 
-        holder.image            .setImageResource(idImage);
-        holder.name             .setText(product.name.toUpperCase());
-        holder.size             .setText(product.amount + " " +product.size);
+        NumberFormat myFormat = NumberFormat.getCurrencyInstance(new Locale("es", "CO"));
+        myFormat.setMaximumFractionDigits(0);
 
-        NumberFormat myFormat   = NumberFormat.getCurrencyInstance(new Locale("es", "CO"));
-        myFormat                .setMaximumFractionDigits(0);
-        holder.total            .setText(myFormat.format(product.total) + " COP");
+        if(product.size != null) {
+
+            //Pizza products
+            holder.image.setImageResource(idImage);
+            holder.name.setText(product.name.toUpperCase());
+            holder.size.setText(product.amount + " " + product.size);
+            holder.total.setText(myFormat.format(product.total) + " COP");
+        }
+        else {
+
+            //Other products
+            holder.image.setImageResource(idImage);
+            holder.name.setText(product.amount + " " + product.name.toUpperCase());
+            holder.total.setText(myFormat.format(product.total) + " COP");
+
+            holder.size.setWidth(0);
+        }
 
         holder.buttonAdd.setOnClickListener(v -> {
 
-            product.amount++;
+            product         .amount++;
             product         .calculateValues();
-            holder.size     .setText(product.amount + " " +product.size);
             holder.total    .setText(myFormat.format(product.total) + " COP");
 
-            productList.set(position, product);
-            mainActivity.shoppingCart.products.set(position, product);
+            if(product.size != null)
+                holder.size .setText(product.amount + " " + product.size);
+            else
+                holder.name .setText(product.amount + " " + product.name);
 
+            productList     .set(position, product);
+            mainActivity    .shoppingCart.products.set(position, product);
+
+            if(mainActivity.shoppingCart.getSize() > 0) {
+               presenter.buttonPayment(true);
+            }
 
         });
 
         holder.buttonRemove.setOnClickListener(v -> {
+
             if (product.amount > 1) {
-                product.amount--;
+                product         .amount--;
                 product         .calculateValues();
-                holder.size     .setText(product.amount + " " +product.size);
                 holder.total    .setText(myFormat.format(product.total) + " COP");
 
-                productList.set(position, product);
-                mainActivity.shoppingCart.products.set(position, product);
+                if(product.size != null)
+                    holder.size .setText(product.amount + " " + product.size);
+                else
+                    holder.name .setText(product.amount + " " + product.name);
+                
+                productList     .set(position, product);
+                mainActivity    .shoppingCart.products.set(position, product);
 
             }
             else {
-                productList.remove(position);
-                notifyDataSetChanged();
+                presenter.showRemoveProductDialog(product, position);
             }
         });
 
@@ -112,7 +137,7 @@ public class CartListAdapter extends RecyclerView.Adapter<CartListAdapter.myView
 
             name        = itemView.findViewById(R.id.name);
             image       = itemView.findViewById(R.id.image);
-            size        = itemView.findViewById(R.id.size);
+            size        = itemView.findViewById(R.id.message);
             total       = itemView.findViewById(R.id.total);
             buttonAdd   = itemView.findViewById(R.id.buttonAdd);
             buttonRemove= itemView.findViewById(R.id.buttonRemove);

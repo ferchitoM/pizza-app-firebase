@@ -1,24 +1,24 @@
 package com.example.pizza_app_firebase.presenter;
 
-import com.example.pizza_app_firebase.model.MenuModel;
+import com.example.pizza_app_firebase.model.SnacksModel;
 import com.example.pizza_app_firebase.product.Product;
-import com.example.pizza_app_firebase.view.MenuView;
+import com.example.pizza_app_firebase.view.SnacksView;
 
 import java.util.ArrayList;
 import java.util.Map;
 
-public class MenuPresenter {
+public class SnacksPresenter {
 
-    private MenuModel model;
-    private MenuView view;
+    private SnacksModel model;
+    private SnacksView view;
 
-    public MenuPresenter(MenuView view) {
-        this.model = new MenuModel();
+    public SnacksPresenter(SnacksView view) {
+        this.model = new SnacksModel();
         this.view = view;
     }
 
     public void loadProducts() {
-        model.loadProducts(new MenuModel.OnLoadProductsListener() {
+        model.loadProducts(new SnacksModel.OnLoadProductsListener() {
             @Override
             public void onSuccess(ArrayList<Product> productList) {
                 view.showProductsOnList(productList);
@@ -31,7 +31,7 @@ public class MenuPresenter {
         });
     }
 
-    public void showDialog(Product product, Map<String, Long> sizes){
-        view.showDialog(product, sizes);
+    public void showDialog(Product product, int index){
+        view.showDialog(product, index);
     }
 }

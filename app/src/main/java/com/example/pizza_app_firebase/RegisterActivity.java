@@ -97,7 +97,7 @@ public class RegisterActivity extends AppCompatActivity {
         newUser.name        = nameText;
         newUser.email       = emailText;
         newUser.password    = passwordText;
-        newUser.phone       = phoneText;
+        newUser.phone       = Long.valueOf(phoneText);
         newUser.address     = addressText;
 
         if(newUser.name.isEmpty() || newUser.email.isEmpty() || newUser.password.isEmpty() || phoneText.isEmpty() || addressText.isEmpty()){

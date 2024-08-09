@@ -5,7 +5,7 @@
     android:id="@+id/frameLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.MenuFragment">
+    tools:context=".fragments.PizzasFragment">
 
     <!-- TODO: Update blank fragment layout -->
 
@@ -22,7 +22,6 @@
                 android:id="@+id/navBar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/coffe_dark"
                 android:paddingStart="5dp"
                 android:paddingTop="10dp">
 
@@ -34,7 +33,7 @@
                     android:layout_marginTop="5dp"
                     android:layout_marginEnd="5dp"
                     android:background="@drawable/rounded_borders"
-                    android:backgroundTint="@color/coffe"
+                    android:backgroundTint="@color/brown"
                     android:drawableStart="@android:drawable/ic_menu_search"
                     android:hint="Buscar..."
                     android:inputType="text"

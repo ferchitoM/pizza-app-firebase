@@ -1,7 +1,7 @@
 package com.example.pizza_app_firebase.presenter;
 
 import com.example.pizza_app_firebase.model.CartModel;
-import com.example.pizza_app_firebase.shopping.CartProduct;
+import com.example.pizza_app_firebase.cart.CartProduct;
 import com.example.pizza_app_firebase.view.CartView;
 
 import java.util.ArrayList;
@@ -30,7 +30,11 @@ public class CartPresenter {
         });
     }
 
-    public void showRemoveProductDialog(CartProduct product){
-        view.showRemoveProductDialog(product);
+    public void showRemoveProductDialog(CartProduct product, int index){
+        view.showRemoveProductDialog(product, index);
+    }
+
+    public void buttonPayment(boolean paymentVisibility){
+        view.buttonPayment(paymentVisibility);
     }
 }
